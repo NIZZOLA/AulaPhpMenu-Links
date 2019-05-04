@@ -7,15 +7,36 @@
 
 <?php
 session_start();
-$usuario = @$_POST['login'];
+$login = @$_POST['login'];
 $senha = @$_POST['senha'];
-	
-if( $usuario == "marcio" && $senha == "123")	
+
+include "config.php";
+include "classUsuario.php";
+$usuario = new Usuario( DB_STRING, DB_USER, DB_PASS);
+
+if( $usuario != "" && $senha != "" )
+{
+   if( $usuario->ConsultarPorEmail( $login ) )	
+      {
+	  // echo "Consultada:".$usuario->GetSenha()." Digitada:".md5( $senha);
+		   if( $usuario->GetSenha() == md5( $senha) )
+		   {
+			   $_SESSION["username"] = $usuario->GetNome();
+			   $_SESSION["userid"] = $usuario->GetUsuarioId();
+			   echo "<h1>Usuário validado ! carregando o site...";
+			   echo '<meta http-equiv="refresh" content="3;URL=./"/>';
+		   }
+		   else
+		   {
+			   echo "Senha incorreta !";
+		   }
+   
+      }
+	else
 	{
-	$_SESSION["username"] = $usuario;
-	echo "<h1>Usuário validado ! carregando o site...";
-	echo '<meta http-equiv="refresh" content="3;URL=./"/>';
+		echo "Usuário não cadastrado !";
 	}
+}
 else
 	{
 	

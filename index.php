@@ -45,7 +45,8 @@
 			<meta http-equiv="refresh" content="0;URL=./login.php"/>
 			<?php
 		}
-			
+
+		echo "Bem vindo ".$_SESSION["username"]."<br>";
 		// obtém a variável menu caso um link tenha sido clicado
 		$opcao = @$_GET['menu'];
 		

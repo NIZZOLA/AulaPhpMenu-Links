@@ -61,7 +61,7 @@ class Usuario extends PDO
         $data = [
             'nome' => $this->GetNome(),
             'email' => $this->GetEmail(),
-            'senha' => $this->GetSenha(),
+            'senha' => md5( $this->GetSenha() ),
         ];
         
         $sql = "INSERT INTO usuario ( nome, email, senha) VALUES (:nome , :email, :senha )";
@@ -89,7 +89,8 @@ class Usuario extends PDO
         $sql = "DELETE FROM `usuario` WHERE usuarioId=".$id;
         $this->query($sql);
     }
-    public function Consultar( $id )
+    
+	public function Consultar( $id )
     {
         $sql = "SELECT * FROM usuario where usuarioid=".$id;
         if($base = $this->query($sql)){
@@ -104,9 +105,28 @@ class Usuario extends PDO
                return true;
             }
          }
-         
          return false;
     }
+	
+	public function ConsultarPorEmail( $email )
+	{
+		$sql = "SELECT * FROM usuario where email='$email'";
+		
+		//echo $sql;
+        if($base = $this->query($sql)){
+ 
+            while($row = $base->fetchObject())
+                {
+                 $this->SetUsuarioId( $row->usuarioId );
+                 $this->SetNome( $row->nome );
+                 $this->SetEmail( $row->email );
+                 $this->SetSenha( $row->senha );
+                 
+               return true;
+            }
+         }
+         return false;
+	}
 	
 	public function Contar()
 	{
