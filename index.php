@@ -7,6 +7,10 @@
 <link href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet">
 <script src="//code.jquery.com/jquery-2.1.0.min.js" type="text/javascript"></script>
 
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+
 <link type="text/css" href="style.css"	media="all" rel="stylesheet"/>
 </head>
 

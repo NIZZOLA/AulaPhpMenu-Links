@@ -67,7 +67,8 @@ class Usuario extends PDO
         $sql = "INSERT INTO usuario ( nome, email, senha) VALUES (:nome , :email, :senha )";
         // Preparação da instrução 
         $stmt= $this->prepare($sql);
-        $stmt->execute($data);
+        $resp = $stmt->execute($data);
+        return $resp;
     }
 
     public function Alterar()

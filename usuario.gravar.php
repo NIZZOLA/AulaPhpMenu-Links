@@ -24,7 +24,11 @@ $usuario->SetSenha($senha);
 
 if ($usuario->ValidarCampos())
 {
-    $usuario->Incluir();
+    $rsp = $usuario->Incluir();
+    if( $rsp )
+        echo "Item gravado com sucesso, código:".$rsp;
+    else
+        echo "Erro na gravação !";
 }
 
 ?>
@@ -39,10 +43,7 @@ if ($usuario->ValidarCampos())
                 <td>Email: </td>
                 <td><?php echo $usuario->GetEmail() ?></td>
             </tr>
-            <tr>
-                <td>Senha: </td>
-                <td><?php echo $usuario->GetSenha() ?></td>
-            </tr>
+            
     </table>
     
 </body>
